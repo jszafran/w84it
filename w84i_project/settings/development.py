@@ -12,7 +12,7 @@ SECRET_KEY = "secret"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'postgres2',
         'USER': 'w84i',
         'PASSWORD': os.getenv('w84i_pwd_dev'),
         'HOST': 'localhost',

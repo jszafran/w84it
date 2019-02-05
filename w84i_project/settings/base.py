@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'base',
+    'users',
 ]
 
 # https://docs.djangoproject.com/en/2.0/topics/auth/passwords/#using-argon2-with-django
@@ -157,3 +158,5 @@ LOGGING = {
         }
     }
 }
+
+AUTH_USER_MODEL = 'users.CustomUser'
