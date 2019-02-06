@@ -12,3 +12,5 @@ class CustomUser(AbstractUser):
     def get_followers(self):
         self.followed_by
 
+    def follow_user(self, obj):
+        pass
