@@ -11,12 +11,12 @@ class User(AbstractUser):
     @classmethod
     def get_user_by_email(cls, email):
         try:
-            return User.objects.filter(email=email)[0]
-        except:
+            return User.objects.get(email=email)
+        except User.DoesNotExist:
             return None
 
-    def get_my_followers(self):
-        return [user for user in self.followed_by.all()]
+    def get_followers(self):
+        return self.followed_by.all()
 
     def follow_user(self, user_email):
         user_to_follow = User.get_user_by_email(user_email)
@@ -30,7 +30,7 @@ class User(AbstractUser):
         if user_to_unfollow:
             user_to_unfollow.followed_by.remove(self)
 
-    def get_users_i_am_following(self):
+    def get_followed(self):
         return self.following.all()
 
 
