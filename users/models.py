@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-class CustomUser(AbstractUser):
+class User(AbstractUser):
     followed_by = models.ManyToManyField("self", symmetrical=False, related_name="following")
     email = models.EmailField(blank=False, unique=True)
 
@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
     @classmethod
     def get_user_by_email(cls, email):
         try:
-            return CustomUser.objects.filter(email=email)[0]
+            return User.objects.filter(email=email)[0]
         except:
             return None
 
@@ -19,14 +19,14 @@ class CustomUser(AbstractUser):
         return [user for user in self.followed_by.all()]
 
     def follow_user(self, user_email):
-        user_to_follow = CustomUser.get_user_by_email(user_email)
+        user_to_follow = User.get_user_by_email(user_email)
         if user_to_follow:
             user_to_follow.followed_by.add(self)
             user_to_follow.save()
             print(f"User '{self.email}' followed user '{user_email}' successfully.")
 
     def unfollow_user(self, email):
-        user_to_unfollow = CustomUser.get_user_by_email(email=email)
+        user_to_unfollow = User.get_user_by_email(email=email)
         if user_to_unfollow:
             user_to_unfollow.followed_by.remove(self)
 

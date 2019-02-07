@@ -1,11 +1,11 @@
 from django.test import TestCase
-from users.models import CustomUser
+from users.models import User
 
-class CustomUserTestCase(TestCase):
+class UserTestCase(TestCase):
     def setUp(self):
-        self.u1 = CustomUser.objects.create_user('test_user_1', 'user_1@test.com', 'lubieplacki')
-        self.u2 = CustomUser.objects.create_user('test_user_2', 'user_2@test.com', 'lubieplacki')
-        self.u3 = CustomUser.objects.create_user('test_user_3', 'user_3@test.com', 'lubieplacki')
+        self.u1 = User.objects.create_user('test_user_1', 'user_1@test.com', 'lubieplacki')
+        self.u2 = User.objects.create_user('test_user_2', 'user_2@test.com', 'lubieplacki')
+        self.u3 = User.objects.create_user('test_user_3', 'user_3@test.com', 'lubieplacki')
         
     def test_follow_user(self):
         self.u1.follow_user(self.u2)
