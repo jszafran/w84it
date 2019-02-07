@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class CustomUser(AbstractUser):
-    followed_by = models.ManyToManyField('self', symmetrical=False)
+    followed_by = models.ManyToManyField("self", symmetrical=False, related_name="following")
     email = models.EmailField(blank=False, unique=True)
 
     def __str__(self):
@@ -31,9 +31,6 @@ class CustomUser(AbstractUser):
             user_to_unfollow.followed_by.remove(self)
 
     def get_users_i_am_following(self):
-        """
-        ???
-        """
-        pass
+        return self.following.all()
 
 
