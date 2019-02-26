@@ -1,13 +1,19 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from .utils import CustomASCIIUsernameValidator
 
 class User(AbstractUser):
+    email = models.EmailField(unique=True)
+    username = models.CharField(help_text='Required. 40 characters or fewer. Letters, digits and ./_ only.', max_length=40, unique=True, validators=[CustomASCIIUsernameValidator()], verbose_name='username')
     followed_by = models.ManyToManyField("self", symmetrical=False, related_name="following")
-    email = models.EmailField(blank=False, unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return self.email
-    
+
     @classmethod
     def get_user_by_email(cls, email):
         try:
@@ -32,5 +38,3 @@ class User(AbstractUser):
 
     def get_followed(self):
         return self.following.all()
-
-

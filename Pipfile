@@ -10,6 +10,8 @@ django-compressor = "*"
 "psycopg2" = "*"
 bcrypt = "*"
 dotenv = "*"
+django-crispy-forms = "==1.7.2"
+setuptools = "==40.8.0"
 
 [dev-packages]
 django-debug-toolbar = "*"

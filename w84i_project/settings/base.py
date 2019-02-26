@@ -46,10 +46,11 @@ INSTALLED_APPS = [
 
     # Third party apps
     'compressor',
+    'crispy_forms',
 
     # Local apps
-    'base',
-    'users',
+    'users.apps.UsersConfig',
+    'pages.apps.PagesConfig',
 ]
 
 # https://docs.djangoproject.com/en/2.0/topics/auth/passwords/#using-argon2-with-django
@@ -134,7 +135,8 @@ TEMPLATES = [
 # URL SETTINGS
 # https://docs.djangoproject.com/en/2.0/ref/settings/#root-urlconf.
 ROOT_URLCONF = 'w84i_project.urls'
-
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 # MIDDLEWARE SETTINGS
 # See: https://docs.djangoproject.com/en/2.0/ref/settings/#middleware
@@ -160,3 +162,4 @@ LOGGING = {
 }
 
 AUTH_USER_MODEL = 'users.User'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
