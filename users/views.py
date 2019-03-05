@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 from users.models import User
@@ -7,12 +8,8 @@ from django.shortcuts import render
 from django.contrib.sites.shortcuts import get_current_site
 from .tokens import account_activation_token
 from django.core.mail import send_mail
+import datetime
 
-# class SignUpView(CreateView):
-#     form_class = UserCreationForm
-#     success_url = reverse_lazy('login')
-#     template_name = 'signup.html'
-#     # fields = ('username', 'email', 'password',)
 
 class EditUserDataView(UpdateView):
     model = User
@@ -31,6 +28,7 @@ class SignupView(TemplateView):
             if form.is_valid():
                 user = form.save(commit=False)
                 user.is_active = False
+                user.to_be_deleted = False
                 user.save()
                 token = account_activation_token.make_token(user)
                 send_mail(
@@ -58,7 +56,33 @@ class SignupView(TemplateView):
                 user.save()
                 return render(request, 'user_account_confirmed.html')
             else:
-                print(get_current_site(request))
                 return render(request, 'home.html')
         else:
             return render(request, 'user_confirmation_invalid_token.html')
+
+class DeletionView(TemplateView):
+
+    @login_required
+    def delete_user(request):
+        if request.method == 'POST':
+            user = request.user
+            user.to_be_deleted = True
+            user.deletion_date = datetime.date.today() + datetime.timedelta(days=7)
+            user.save()
+            return render(request, 'home.html')
+
+        else:
+            return render(request, 'user_deletion_form.html')
+
+    def revert_deletion(request):
+        if request.method == 'POST':
+            user = request.user
+            user.to_be_deleted = False
+            user.deletion_date = None
+            user.save()
+            return render(request, 'home.html')
+
+        else:
+            return render(request, 'revert_user_deletion.html')
+
+

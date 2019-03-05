@@ -8,7 +8,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
     <title>{% block title %}Newspaper App{% endblock title %}</title>
   </head>
   <body>
@@ -51,6 +50,13 @@
         {% endif %}
       </div>
     </nav>
+
+        {% if user.is_authenticated and user.to_be_deleted %}
+        <div class="alert alert-danger" role="alert">
+          Your account will be deleted on {{ user.deletion_date }}. If you'd like to revert this action,
+          <a href="{% url 'revert_user_deletion' %}">click here.</a>
+        </div>
+        {% endif %}
 
 
     <div class="container">

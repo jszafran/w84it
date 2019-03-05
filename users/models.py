@@ -7,6 +7,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     username = models.CharField(help_text='Required. 40 characters or fewer. Letters, digits and ./_ only.', max_length=40, unique=True, validators=[CustomASCIIUsernameValidator()], verbose_name='username')
     followed_by = models.ManyToManyField("self", symmetrical=False, related_name="following")
+    to_be_deleted = models.BooleanField(default=False)
+    deletion_date = models.DateField(null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']

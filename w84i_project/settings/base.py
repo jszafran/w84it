@@ -135,8 +135,9 @@ TEMPLATES = [
 # URL SETTINGS
 # https://docs.djangoproject.com/en/2.0/ref/settings/#root-urlconf.
 ROOT_URLCONF = 'w84i_project.urls'
+LOGIN_URL = '/users/login'
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = '/users/login'
 
 # MIDDLEWARE SETTINGS
 # See: https://docs.djangoproject.com/en/2.0/ref/settings/#middleware
