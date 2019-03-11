@@ -2,14 +2,17 @@ from django.test import TestCase, Client
 from users.models import User
 import datetime
 from django.urls import reverse
+from w84i_project.celery import app
+from .tasks import delete_not_activated_users, delete_leavers_accounts
+from freezegun import freeze_time
 
-class UserTestCase(TestCase):
+class UserTestCases(TestCase):
     def setUp(self):
         self.u1 = User.objects.create_user('testuser1', 'user_1@test.com', 'lubieplacki')
         self.u2 = User.objects.create_user('testuser2', 'user_2@test.com', 'lubieplacki')
         self.u3 = User.objects.create_user('testuser3', 'user_3@test.com', 'lubieplacki')
         self.client = Client()
-        self.grace_period_days = 7 # number of days for which user can revert his decision about account deletion
+        self.grace_period_days = 7
 
     def test_follow_user(self):
         self.u1.follow_user(self.u2)
@@ -46,6 +49,7 @@ class UserTestCase(TestCase):
         user.refresh_from_db()
         self.assertTrue(user.to_be_deleted)
 
+    @freeze_time("2019-03-01")
     def test_cancellation_of_user_deletion(self):
         self.client.login(email='user_1@test.com', password='lubieplacki')
         user = User.objects.get(email='user_1@test.com')
@@ -59,3 +63,49 @@ class UserTestCase(TestCase):
         user.refresh_from_db()
         self.assertFalse(user.to_be_deleted)
         self.assertIsNone(user.deletion_date)
+
+# Celery tasks tests
+class CeleryTasksTestCases(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user('user', 'user@test.com', 'lubieplacki')
+        # celery app
+        app.conf.update(CELERY_ALWAYS_EAGER=True)
+
+    @freeze_time("2019-03-01")
+    def test_deleting_users_that_never_activated_their_accounts_and_meet_deletion_criteria(self):
+        self.user.is_active = False
+        self.user.last_login = None
+        self.user.date_joined = datetime.date.today() - datetime.timedelta(8)
+        self.user.save()
+        self.assertEqual(User.objects.all().count(), 1)
+        delete_not_activated_users.delay(7) # delete accounts older than 7 days
+        self.assertEqual(User.objects.all().count(), 0)
+
+    @freeze_time("2019-03-01")
+    def test_if_user_not_meeting_deletion_criteria_is_not_deleted_unexpectedly(self):
+        # test user that never activated account but date_joined is less than deletion date parameter
+        self.user.is_active = False
+        self.user.last_login = None
+        self.user.date_joined = datetime.date.today() - datetime.timedelta(3)
+        self.user.save()
+        self.assertEqual(User.objects.all().count(), 1)
+        delete_not_activated_users.delay(7)
+        self.assertEqual(User.objects.all().count(), 1)
+
+    @freeze_time("2019-03-01")
+    def test_deleting_leavers_accounts(self):
+        self.user.deletion_date = datetime.date.today()
+        self.user.to_be_deleted = True
+        self.user.save()
+        self.assertEqual(User.objects.all().count(), 1)
+        delete_leavers_accounts.delay()
+        self.assertEqual(User.objects.all().count(), 0)
+
+    @freeze_time("2019-03-01")
+    def test_if_users_with_future_deletion_date_are_not_deleted_unexpectedly(self):
+        self.user.deletion_date = datetime.date.today() + datetime.timedelta(days=3)
+        self.user.to_be_deleted = True
+        self.user.save()
+        self.assertEqual(User.objects.all().count(), 1)
+        delete_leavers_accounts.delay()
+        self.assertEqual(User.objects.all().count(), 1)
