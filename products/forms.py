@@ -7,10 +7,12 @@ from commons.validation_messages import (FORM_URL_INVALID, FORM_PRICE_INVALID_DE
                                          FORM_UNIQUE_USER_AND_PRODUCT_NAME_CONSTRAINT_VIOLATION, FORM_DATE_INVALID)
 
 
-class AddProductForm(forms.ModelForm):
+class ProductForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        super(AddProductForm, self).__init__(*args, **kwargs)
+        self.action_type = kwargs.pop('action_type', None)
+        self.orig_name = kwargs.pop('orig_name', None)
+        super(ProductForm, self).__init__(*args, **kwargs)
 
     name = forms.CharField(max_length=200, label='Product Name')
     description = forms.CharField(label='Product Description',
@@ -33,9 +35,15 @@ class AddProductForm(forms.ModelForm):
 
     def clean(self):
         cd = self.cleaned_data
-        # check if there's no duplicated product name under request's user
-        if Product.objects.filter(Q(name=cd['name']) &
-                                  Q(owner_id=self.request.user.pk)).exists():
+        name_and_user_not_unique = Product.objects.filter(name=cd['name'], owner_id=self.request.user.pk).exists()
+
+
+        # handle ADD
+        if self.action_type == 'ADD' and name_and_user_not_unique:
+            self.errors['name'] = [FORM_UNIQUE_USER_AND_PRODUCT_NAME_CONSTRAINT_VIOLATION]
+
+        # handle EDIT
+        if self.action_type == 'EDIT' and name_and_user_not_unique and self.orig_name != cd['name']:
             self.errors['name'] = [FORM_UNIQUE_USER_AND_PRODUCT_NAME_CONSTRAINT_VIOLATION]
 
         # make sure if there's valid currency selected when price > 0
