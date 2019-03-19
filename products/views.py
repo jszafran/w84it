@@ -5,7 +5,8 @@ from django.views.generic import TemplateView
 from .forms import ProductForm
 from .models import Product
 
-class AddProduct(TemplateView):
+
+class Product(TemplateView):
     @login_required
     def add_product(request):
         if request.method == 'POST':
@@ -39,7 +40,3 @@ class AddProduct(TemplateView):
         else:
             form = ProductForm(instance=product)
             return render(request, 'add_product.html', {'form': form})
-
-
-
-
