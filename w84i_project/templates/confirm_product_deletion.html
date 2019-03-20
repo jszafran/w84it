@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Product Deletion{% endblock title %}
+
+{% block content %}
+<h1>Confirm Product Deletion.</h1>
+<p>You're about to delete '{{ product.name }}' product. Please be aware that this action cannot be reverted!
+Once you confirm with below button, product and all data associated with it will be permanently deleted.</p>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit" action="delete_product">Confirm Delete</button>
+</form>
+{% endblock content %}
