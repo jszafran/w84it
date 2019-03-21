@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # Local apps
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
+    'products.apps.ProductsConfig',
 ]
 
 # https://docs.djangoproject.com/en/2.0/topics/auth/passwords/#using-argon2-with-django
