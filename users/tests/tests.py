@@ -3,7 +3,7 @@ from users.models import User
 import datetime
 from django.urls import reverse
 from w84i_project.celery import app
-from .tasks import delete_not_activated_users, delete_leavers_accounts
+from users.tasks import delete_not_activated_users, delete_leavers_accounts
 from freezegun import freeze_time
 
 class UserTestCases(TestCase):

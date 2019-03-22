@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from users.models import User
-from .models import Product
+from ..models import Product
 from .test_resources import datasets
 from commons.validation_messages import (FORM_URL_INVALID, FORM_PRICE_INVALID_DECIMALS,
                                          FORM_PRICE_INVALID_DIGITS_AMOUNT, FORM_CURRENCY_INVALID,
@@ -11,7 +11,6 @@ from commons.validation_messages import (FORM_URL_INVALID, FORM_PRICE_INVALID_DE
 class ProductTestCases(TestCase):
     def setUp(self):
         User.objects.create_user('testuser1', 'user_1@test.com', 'lubieplacki')
-        self.client = Client()
         self.client.login(email='user_1@test.com', password='lubieplacki')
         self.products_count = Product.objects.all().count
         self.datasets = datasets
@@ -55,13 +54,3 @@ class ProductTestCases(TestCase):
         response = self.client.post(reverse('add_product'), datasets.get('invalid_data_wrong_dates'))
         self.assertContains(response, FORM_DATE_INVALID)
         self.assertEqual(self.products_count(), 0)
-
-    def test_if_no_orphan_product_is_left_after_owner_deletion(self):
-        self.assertEqual(self.products_count(), 0)
-        self.client.post(reverse('add_product'), datasets.get('full_valid_data'))
-        self.assertEquals(self.products_count(), 1)
-        owner = User.objects.get(username='testuser1')
-        self.assertEqual(owner.pk, Product.objects.get(pk=1).owner_id)
-        owner.delete()
-        self.assertFalse(User.objects.filter(pk=1).exists())
-        self.assertFalse(Product.objects.filter(pk=1).exists())

@@ -1,11 +1,16 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
 from django.views.generic import TemplateView
 from .forms import ProductForm
 from .models import Product
 
+
+def user_owns_product(user, product_pk):
+    product = get_object_or_404(Product, pk=product_pk)
+    if product.owner == user:
+        return True
+    return False
 
 class ProductView(TemplateView):
     @login_required
@@ -24,19 +29,18 @@ class ProductView(TemplateView):
 
     @login_required
     def edit_product(request, pk=None):
-        orig_name = None
-        if pk:
-            product = get_object_or_404(Product, pk=pk)
+        if not user_owns_product(request.user, pk):
+            raise Http404()
+        else:
+            product = Product.objects.get(pk=pk)
             orig_name = product.name
-            if product.owner != request.user or not product:
-                raise Http404()
 
         if request.method == 'POST':
             if 'save_product' in request.POST:
                 form = ProductForm(request.POST, instance=product, request=request, orig_name=orig_name, action_type='EDIT')
                 if form.is_valid():
                     form.save()
-                    return HttpResponse('Article successfully edited!')
+                    return HttpResponse('Product successfully edited!')
                 else:
                     return render(request, 'edit_product.html', {'form': form})
             elif 'delete_product' in request.POST:
@@ -46,12 +50,11 @@ class ProductView(TemplateView):
             return render(request, 'edit_product.html', {'form': form})
 
     @login_required
-    def delete_product(request, pk=None):
-        product = None
-        if pk:
-            product = get_object_or_404(Product, pk=pk)
-            if product.owner != request.user or not product:
-                raise Http404()
+    def delete_product(request, pk):
+        if not user_owns_product(request.user, pk):
+            raise Http404()
+        else:
+            product = Product.objects.get(pk=pk)
 
         if request.method == 'POST':
             product.delete()
