@@ -3,9 +3,6 @@ from django.urls import reverse
 from users.models import User
 from ..models import Product
 from .test_resources import datasets
-from commons.validation_messages import (FORM_URL_INVALID, FORM_PRICE_INVALID_DECIMALS,
-                                         FORM_PRICE_INVALID_DIGITS_AMOUNT, FORM_CURRENCY_INVALID,
-                                         FORM_UNIQUE_USER_AND_PRODUCT_NAME_CONSTRAINT_VIOLATION, FORM_DATE_INVALID)
 from products.tests.factory import ProductsFactory
 
 

@@ -8,9 +8,8 @@ from .models import Product
 
 def user_owns_product(user, product_pk):
     product = get_object_or_404(Product, pk=product_pk)
-    if product.owner == user:
-        return True
-    return False
+    return product.owner == user
+
 
 class ProductView(TemplateView):
     @login_required
