@@ -1,7 +1,7 @@
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from .utils import CustomASCIIUsernameValidator
+
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
@@ -40,3 +40,6 @@ class User(AbstractUser):
 
     def get_followed(self):
         return self.following.all()
+
+    def get_followed_products(self):
+        return self.followed_products.all()

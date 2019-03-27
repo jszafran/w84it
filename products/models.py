@@ -14,6 +14,8 @@ class Product(models.Model):
     launch_date = models.DateField(null=True, blank=True)
     created_date = models.DateTimeField(null=False, blank=False, auto_now=True)
     last_modified_date = models.DateTimeField(null=False, blank=False, auto_now=True)
+    followed_by = models.ManyToManyField(User, related_name="followed_products", blank=True)
+    followers_num = models.PositiveIntegerField(default=0)
 
     class Meta:
         unique_together = ('name', 'owner',)
@@ -21,5 +23,17 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    def add_product(self):
-        pass
+    def add_follower(self, user):
+        if user not in self.followed_by.all():
+            self.followed_by.add(user)
+            self.followers_num += 1
+
+
+    def remove_follower(self, user):
+        if user not in self.followed_by.all():
+            return
+        self.followed_by.remove(user)
+        self.followers_num -= 1
+
+    def get_followers(self):
+        return self.followed_by.all()
