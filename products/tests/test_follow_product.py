@@ -13,22 +13,22 @@ class ProductTestCases(TestCase):
 
     def test_adding_new_product_follower(self):
         self.assertEqual(self.prod_1.followed_by.all().count(), 0)
-        self.assertEqual(self.prod_1.followers_num, 0)
+        self.assertEqual(self.prod_1.get_followers_count(), 0)
         self.prod_1.add_follower(self.user_2)
         self.prod_1.add_follower(self.user_3)
         self.assertEqual(self.prod_1.followed_by.all().count(), 2)
         self.assertIn(self.user_2, self.prod_1.followed_by.all())
         self.assertIn(self.user_3, self.prod_1.followed_by.all())
-        self.assertEqual(self.prod_1.followers_num, 2)
+        self.assertEqual(self.prod_1.get_followers_count(), 2)
 
     def test_removing_product_follower(self):
         self.assertEqual(self.prod_1.followed_by.all().count(), 0)
-        self.assertEqual(self.prod_1.followers_num, 0)
+        self.assertEqual(self.prod_1.get_followers_count(), 0)
         self.prod_1.add_follower(self.user_2)
         self.prod_1.add_follower(self.user_3)
         self.assertEqual(self.prod_1.followed_by.all().count(), 2)
-        self.assertEqual(self.prod_1.followers_num, 2)
+        self.assertEqual(self.prod_1.get_followers_count(), 2)
         self.prod_1.remove_follower(self.user_2)
         self.assertEqual(self.prod_1.followed_by.all().count(), 1)
-        self.assertEqual(self.prod_1.followers_num, 1)
+        self.assertEqual(self.prod_1.get_followers_count(), 1)
         self.assertIn(self.user_3, self.prod_1.followed_by.all())

@@ -15,7 +15,6 @@ class Product(models.Model):
     created_date = models.DateTimeField(null=False, blank=False, auto_now=True)
     last_modified_date = models.DateTimeField(null=False, blank=False, auto_now=True)
     followed_by = models.ManyToManyField(User, related_name="followed_products", blank=True)
-    followers_num = models.PositiveIntegerField(default=0)
 
     class Meta:
         unique_together = ('name', 'owner',)
