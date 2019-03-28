@@ -21,14 +21,6 @@ class ProductTestCases(TestCase):
         self.assertIn(self.user_3, self.prod_1.followed_by.all())
         self.assertEqual(self.prod_1.followers_num, 2)
 
-    def test_if_adding_product_follower_is_idempotent(self):
-        self.assertEqual(self.prod_1.followed_by.all().count(), 0)
-        self.assertEqual(self.prod_1.followers_num, 0)
-        for _ in range(10):
-            self.prod_1.add_follower(self.user_2)
-        self.assertEqual(self.prod_1.followed_by.all().count(), 1)
-        self.assertEqual(self.prod_1.followers_num, 1)
-
     def test_removing_product_follower(self):
         self.assertEqual(self.prod_1.followed_by.all().count(), 0)
         self.assertEqual(self.prod_1.followers_num, 0)
@@ -40,14 +32,3 @@ class ProductTestCases(TestCase):
         self.assertEqual(self.prod_1.followed_by.all().count(), 1)
         self.assertEqual(self.prod_1.followers_num, 1)
         self.assertIn(self.user_3, self.prod_1.followed_by.all())
-
-    def test_if_removing_follower_is_idempotent(self):
-        self.assertEqual(self.prod_1.followed_by.all().count(), 0)
-        self.assertEqual(self.prod_1.followers_num, 0)
-        self.prod_1.add_follower(self.user_2)
-        self.assertEqual(self.prod_1.followed_by.all().count(), 1)
-        self.assertEqual(self.prod_1.followers_num, 1)
-        for _ in range(10):
-            self.prod_1.remove_follower(self.user_2)
-        self.assertEqual(self.prod_1.followed_by.all().count(), 0)
-        self.assertEqual(self.prod_1.followers_num, 0)

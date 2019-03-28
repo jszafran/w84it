@@ -24,16 +24,13 @@ class Product(models.Model):
         return self.name
 
     def add_follower(self, user):
-        if user not in self.followed_by.all():
-            self.followed_by.add(user)
-            self.followers_num += 1
-
+        self.followed_by.add(user)
 
     def remove_follower(self, user):
-        if user not in self.followed_by.all():
-            return
         self.followed_by.remove(user)
-        self.followers_num -= 1
 
     def get_followers(self):
         return self.followed_by.all()
+
+    def get_followers_count(self):
+        return self.followed_by.all().count()
