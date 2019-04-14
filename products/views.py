@@ -22,6 +22,7 @@ class ProductView(TemplateView):
                 product.save()
                 return HttpResponse('Product created!')
             else:
+                print(request.LANGUAGE_CODE)
                 return render(request, 'add_product.html', {'form': form})
 
         return render(request, 'add_product.html', {'form': ProductForm()})
@@ -59,4 +60,4 @@ class ProductView(TemplateView):
             product.delete()
             return HttpResponse('Product deleted from database!')
         else:
-            return render(request, 'confirm_product_deletion.html')
+            return render(request, 'confirm_product_deletion.html', {'product': product})

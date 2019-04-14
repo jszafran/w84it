@@ -1,0 +1,360 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-14 18:51+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: commons/validation_messages.py:3
+msgid "Enter a valid URL."
+msgstr "Wprowadź poprawny URL."
+
+#: commons/validation_messages.py:4
+msgid "Ensure that there are no more than 2 decimal places."
+msgstr "Upewnij się, że liczba nie zawiera więcej niż 2 miejsca po przecinku."
+
+#: commons/validation_messages.py:5
+msgid "Ensure that there are no more than 11 digits in total."
+msgstr "Upewnij się, że liczba nie posiada łącznie więcej niz 11 cyfr."
+
+#: commons/validation_messages.py:6
+msgid ""
+"Product has price but no currency. Please either set price to 0 or pick "
+"currency."
+msgstr ""
+"Brak wartości waluty - ustaw cenę produktu na 0 lub wybierz poprawną walutę."
+
+#: commons/validation_messages.py:7
+msgid "You already have product registered under such name. Pick another one!"
+msgstr ""
+"Wybierz inną nazwę - posiadasz już inny produkt zarejestrowany pod taką samą "
+"nazwą."
+
+#: commons/validation_messages.py:8
+msgid "Enter a valid date."
+msgstr "Proszę wprowadzić poprawną date."
+
+#: products/forms.py:17
+msgid "Product Name"
+msgstr "Nazwa produktu"
+
+#: products/forms.py:18
+msgid "Product Description"
+msgstr "Opis produktu"
+
+#: products/forms.py:20
+msgid "Link to your product's website"
+msgstr "Link do strony www produktu"
+
+#: products/forms.py:22
+msgid ""
+"Product's price (if it does not require any purchase, please set the value "
+"as 0)."
+msgstr "Cena produktu (gdy produkt jest darmowy, ustaw wartość na 0.)"
+
+#: products/forms.py:26
+msgid "Currency"
+msgstr "Waluta"
+
+#: products/forms.py:29
+msgid "Work start date"
+msgstr "Data rozpoczęcia pracy nad produktem"
+
+#: products/forms.py:32
+msgid "Launch date"
+msgstr "Data startu produktu"
+
+#: users/admin.py:19
+msgid "Personal info"
+msgstr ""
+
+#: users/admin.py:20
+msgid "Permissions"
+msgstr ""
+
+#: users/admin.py:22
+msgid "Important dates"
+msgstr ""
+
+#: users/forms.py:12
+#: users/forms.py:23
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+#: users/models.py:8
+msgid "Required. 40 characters or fewer. Letters, digits and ./_ only."
+msgstr ""
+"Wymagane pole; dlugość mniej niż 40 znaków. Powinno składać się z "
+"angielskich liter, cyfr oraz znaków ./_."
+
+#: users/utils.py:9
+msgid ""
+"Enter a valid username. This value may contain only English letters, "
+"numbers, and ./_ characters."
+msgstr ""
+"Wprowadź poprawną nazwę użytkownika (może składać się tylko z angielskich "
+"liter, numerów oraz symboli ./."
+
+#: w84i_project/templates/add_product.html:5
+#: w84i_project/templates/add_product.html:12
+msgid "Add Product"
+msgstr "Dodaj Produkt"
+
+#: w84i_project/templates/add_product.html:8
+msgid "Add Product:"
+msgstr "Dodaj Produkt:"
+
+#: w84i_project/templates/confirm_product_deletion.html:3
+msgid "Confirm Product Deletion"
+msgstr "Potwierdź Usunięcie Produktu"
+
+#: w84i_project/templates/confirm_product_deletion.html:6
+msgid "Confirm Product Deletion."
+msgstr "Potwierdź Usunięcie Produktu"
+
+#: w84i_project/templates/confirm_product_deletion.html:7
+msgid "You're about to delete"
+msgstr "Usuniesz zaraz produkt"
+
+#: w84i_project/templates/confirm_product_deletion.html:9
+msgid "product. Please be aware that this action cannot be reverted!"
+msgstr "Pamiętaj, że nie można cofnąć tej akcji!"
+
+#: w84i_project/templates/confirm_product_deletion.html:10
+msgid ""
+"Once you confirm with below button, product and all data associated with it "
+"will be permanently deleted."
+msgstr ""
+"Gdy potwierdzisz akcję poniższym przyciskiem, produkt, oraz wszelkie dane "
+"przypisane do niego, zostaną usunięte."
+
+#: w84i_project/templates/confirm_product_deletion.html:13
+msgid "Confirm Delete"
+msgstr "Potwierdź Usunięcie Produktu"
+
+#: w84i_project/templates/edit_product.html:5
+msgid "Edit Product"
+msgstr "Edytuj Produkt"
+
+#: w84i_project/templates/edit_product.html:8
+msgid "Edit Product:"
+msgstr "Edytuj Produkt:"
+
+#: w84i_project/templates/edit_product.html:12
+msgid "Save Product"
+msgstr "Zapisz Zmiany"
+
+#: w84i_project/templates/edit_product.html:13
+msgid "Delete Product"
+msgstr "Usuń Produkt"
+
+#: w84i_project/templates/edit_user_data.html:6
+msgid "Edit Data"
+msgstr "Edytuj Twoje dane"
+
+#: w84i_project/templates/edit_user_data.html:8
+msgid "Edit your data."
+msgstr "Edytuj Twoje dane"
+
+#: w84i_project/templates/edit_user_data.html:12
+msgid "Save"
+msgstr "Zapisz"
+
+#: w84i_project/templates/home.html:4
+msgid "Home"
+msgstr "Strona główna"
+
+#: w84i_project/templates/home.html:8
+msgid "Hi"
+msgstr "Witaj"
+
+#: w84i_project/templates/home.html:9
+msgid "Log Out"
+msgstr "Wyloguj się"
+
+#: w84i_project/templates/home.html:11
+msgid "You are not logged in"
+msgstr "Nie jesteś zalogowany"
+
+#: w84i_project/templates/home.html:12
+#: w84i_project/templates/registration/login.html:6
+#: w84i_project/templates/registration/login.html:9
+#: w84i_project/templates/registration/login.html:13
+msgid "Log In"
+msgstr "Zaloguj się"
+
+#: w84i_project/templates/home.html:13 w84i_project/templates/signup.html:5
+#: w84i_project/templates/signup.html:7 w84i_project/templates/signup.html:11
+msgid "Sign Up"
+msgstr "Załóż konto"
+
+#: w84i_project/templates/registration/login.html:14
+msgid "Forgot your password? Reset it "
+msgstr "Zapomniałeś hasła? Zresetuj je "
+
+#: w84i_project/templates/registration/login.html:14
+msgid "here"
+msgstr "tutaj"
+
+#: w84i_project/templates/registration/password_change_done.html:3
+msgid "Password Change Successful"
+msgstr "Pomyślna zmiana hasła"
+
+#: w84i_project/templates/registration/password_change_done.html:6
+msgid "Password change successful!"
+msgstr "Pomyślna zmiana hasła!"
+
+#: w84i_project/templates/registration/password_change_done.html:7
+msgid "Your password was changed."
+msgstr "Twoje hasło zostało zmienione."
+
+#: w84i_project/templates/registration/password_change_form.html:5
+#: w84i_project/templates/registration/password_change_form.html:8
+msgid "Password Change"
+msgstr "Zmiana hasła"
+
+#: w84i_project/templates/registration/password_change_form.html:9
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+"Wprowadź stare hasło, a następnie wpisz nowe hasło dwukrotnie, abyśmy mogli "
+"potwierdzić ich zgodność."
+
+#: w84i_project/templates/registration/password_change_form.html:14
+#: w84i_project/templates/registration/password_reset_confirm.html:12
+msgid "Change my password"
+msgstr "Zmień hasło"
+
+#: w84i_project/templates/registration/password_reset_complete.html:3
+#: w84i_project/templates/registration/password_reset_complete.html:6
+msgid "Password reset complete"
+msgstr "Pomyślna zmiana hasła"
+
+#: w84i_project/templates/registration/password_reset_complete.html:7
+msgid "Your new password has been set. You can log in now on "
+msgstr "Twoje hasło zostało zmienione. Możesz teraz przejść do"
+
+#: w84i_project/templates/registration/password_reset_complete.html:8
+msgid " log in page"
+msgstr " strony logowania"
+
+#: w84i_project/templates/registration/password_reset_confirm.html:5
+msgid "Enter new password"
+msgstr "Wprowadź nowe hasło"
+
+#: w84i_project/templates/registration/password_reset_confirm.html:8
+msgid "Set a new password."
+msgstr "Zmień hasło"
+
+#: w84i_project/templates/registration/password_reset_done.html:3
+msgid "Email Sent"
+msgstr "Email został wysłany"
+
+#: w84i_project/templates/registration/password_reset_done.html:6
+msgid "Check your inbox."
+msgstr "Sprawdź Twoją pocztę."
+
+#: w84i_project/templates/registration/password_reset_done.html:7
+msgid ""
+"We've emailed you instructions for setting your password. You should receive "
+"the email shortly!"
+msgstr "Wysłaliśmy Ci wskazówki odnośnie zmiany hasła, powinieneś wkrótce otrzymać maila!"
+
+#: w84i_project/templates/registration/password_reset_form.html:5
+msgid "Forgot Your Password?"
+msgstr "Zapomniałeś hasła?"
+
+#: w84i_project/templates/registration/password_reset_form.html:8
+msgid "Forgot your password?"
+msgstr "Zapomniałeś hasła?"
+
+#: w84i_project/templates/registration/password_reset_form.html:9
+msgid ""
+"Enter your email address below, and we'll email instructions for setting a "
+"new one."
+msgstr "Wprowadź adres email Twojego konta. Prześlemy na niego wskazówki odnośnie zmiany hasła."
+
+#: w84i_project/templates/registration/password_reset_form.html:13
+msgid "Send me instructions!"
+msgstr "Wyślij wskazówki!"
+
+#: w84i_project/templates/revert_user_deletion.html:4
+#: w84i_project/templates/revert_user_deletion.html:7
+msgid "Revert Deletion"
+msgstr "Cofnij Usunięcie Konta"
+
+#: w84i_project/templates/revert_user_deletion.html:14
+msgid "Cancel Account Deletion"
+msgstr "Anuluj Usunięcie Konta"
+
+#: w84i_project/templates/user_account_confirmed.html:4
+msgid "Account Confirmed"
+msgstr "Konto potwierdzone"
+
+#: w84i_project/templates/user_account_confirmed.html:6
+msgid "Your account has been activated!"
+msgstr "Twoje konto zostało aktywowane!"
+
+#: w84i_project/templates/user_account_confirmed.html:7
+msgid "You can "
+msgstr "Możesz "
+
+#: w84i_project/templates/user_account_confirmed.html:7
+msgid "log in"
+msgstr "zalogować się"
+
+#: w84i_project/templates/user_account_confirmed.html:7
+msgid "to the site."
+msgstr "do strony."
+
+#: w84i_project/templates/user_confirmation_invalid_token.html:3
+msgid "Invalid token"
+msgstr "Token nieważny"
+
+#: w84i_project/templates/user_confirmation_invalid_token.html:6
+msgid "Token is invalid."
+msgstr "Token jest nieważny."
+
+#: w84i_project/templates/user_confirmation_invalid_token.html:7
+msgid "Something went wrong."
+msgstr "Coś poszło nie tak."
+
+#: w84i_project/templates/user_confirmation_message.html:4
+msgid "Account Activation"
+msgstr "Aktywowanie konta"
+
+#: w84i_project/templates/user_confirmation_message.html:7
+msgid "You're almost there!"
+msgstr "Już prawie koniec!"
+
+#: w84i_project/templates/user_confirmation_message.html:8
+msgid "We've sent an email with account activation instructions to"
+msgstr "Wysłaliśmy Ci emaila z instrukcjami odnośnie aktywowania konta na"
+
+#: w84i_project/templates/user_deletion_form.html:3
+msgid "User Deletion"
+msgstr "Usunięcie Konta"
+
+#: w84i_project/templates/user_deletion_form.html:6
+msgid "Confirming user deletion"
+msgstr "Potwierdzenie usunięcia konta"
+
+#: w84i_project/templates/user_deletion_form.html:14
+msgid "Confirm deletion"
+msgstr "Potwierdź usunięcie konta"

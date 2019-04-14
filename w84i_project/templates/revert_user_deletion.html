@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Revert Deletion{% endblock title %}
+{% block title %}{% trans "Revert Deletion" %}{% endblock title %}
 
 {% block content %}
-<h1>Revert Deletion</h1>
-<p1>We are happy that you want stay with us :). Please confirm with below button
-that we should not delete your account.</p1>
+<h1>{% trans "Revert Deletion" %}</h1>
+<p1>{% trans "We are happy that you want stay with us :). Please confirm with below button
+that we should not delete your account." %}</p1>
 
 <p>
   <form method="post">
   {% csrf_token %}
-  <button class="btn btn-success ml-0" type="submit">Cancel Account Deletion</button>
+  <button class="btn btn-success ml-0" type="submit">{% trans "Cancel Account Deletion" %}</button>
 </form>
 </p>
 

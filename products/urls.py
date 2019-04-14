@@ -2,6 +2,7 @@ from django.urls import path
 from django.conf.urls import url
 from .views import ProductView
 from . import views
+from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path('add/', ProductView.add_product, name='add_product'),

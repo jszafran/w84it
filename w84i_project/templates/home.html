@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}{% trans "Home" %}{% endblock title %}
 
 {% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% trans "Hi" %} {{ user.username }}!
+  <p><a href="{% url 'logout' %}">{% trans "Log Out" %}</a></p>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a> |
-  <a href="{% url 'signup' %}">Sign Up</a>
+  <p>{% trans "You are not logged in" %} </p>
+  <a href="{% url 'login' %}">{% trans "Log In" %}</a> |
+  <a href="{% url 'signup' %}">{% trans "Sign Up" %}</a>
 {% endif %}
 {% endblock content %}

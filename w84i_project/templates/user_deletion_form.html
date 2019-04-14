@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
-
-{% block title %}User Deletion{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans "User Deletion" %}{% endblock title %}
 
 {% block content %}
-<h1>Confirming user deletion</h1>
-<p1>You're about to start process of user deletion. Clicking confirmation button will
+<h1>{% trans "Confirming user deletion" %}</h1>
+<p1>{% "You're about to start process of user deletion. Clicking confirmation button will
 not delete your account immediately - you will have 7 days to change your mind and stay
-with us. If no action will be taken, account will be automatically deleted after 7 days.</p1>
+with us. If no action will be taken, account will be automatically deleted after 7 days." %}</p1>
 
 <p>
   <form method="post">
   {% csrf_token %}
-  <button class="btn btn-danger" type="submit">Confirm deletion</button>
+  <button class="btn btn-danger" type="submit">{% trans "Confirm deletion" %}</button>
 </form>
 </p>
 

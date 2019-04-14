@@ -77,7 +77,14 @@ TIME_ZONE = 'UTC'
 
 # https://docs.djangoproject.com/en/2.0/ref/settings/#language-code
 LANGUAGE_CODE = 'en-us'
-
+LANGUAGES = [
+    ('pl', 'Polish'),
+    ('en', 'English')
+]
+LOCALE_PATHS = [
+    os.path.join(PROJECT_ROOT, 'translations'),
+    os.path.join(PROJECT_ROOT, 'translations/locale'),
+]
 # https://docs.djangoproject.com/en/2.0/ref/settings/#use-i18n
 USE_I18N = True
 
@@ -126,7 +133,8 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages'
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -145,6 +153,7 @@ LOGOUT_REDIRECT_URL = '/users/login'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

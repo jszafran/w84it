@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
-
-{% block title %}Confirm Product Deletion{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans "Confirm Product Deletion" %}{% endblock title %}
 
 {% block content %}
-<h1>Confirm Product Deletion.</h1>
-<p>You're about to delete '{{ product.name }}' product. Please be aware that this action cannot be reverted!
-Once you confirm with below button, product and all data associated with it will be permanently deleted.</p>
+<h1>{% trans "Confirm Product Deletion." %}</h1>
+<p>{% trans "You're about to delete" %}
+  '{{ product.name }}'.
+  {% trans "product. Please be aware that this action cannot be reverted!" %}
+{% trans "Once you confirm with below button, product and all data associated with it will be permanently deleted." %}</p>
 <form method="post">
     {% csrf_token %}
-    <button class="btn btn-danger" type="submit" action="delete_product">Confirm Delete</button>
+    <button class="btn btn-danger" type="submit" action="delete_product">{% trans "Confirm Delete" %}</button>
 </form>
 {% endblock content %}

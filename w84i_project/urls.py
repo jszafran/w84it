@@ -11,13 +11,14 @@ from django.views.defaults import (permission_denied,
                                    server_error)
 from users import views as user_views
 from django.urls import path, include
+from django.conf.urls.i18n import i18n_patterns
 
 
 sitemaps = {
     # Fill me with sitemaps
 }
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     # url(r'', include('base.urls')),
 
     # Admin
@@ -41,7 +42,7 @@ urlpatterns = [
     path('users/', include('django.contrib.auth.urls')),
     path('', include('pages.urls')),
     path('products/', include('products.urls')),
-]
+)
 
 if settings.DEBUG:
     # Add debug-toolbar

@@ -1,8 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}You're almost there!
+{% load i18n %}
 
-{% block title %}Account Activation{% endblock title%}
+{% block title %}{% trans "Account Activation" %}{% endblock title%}
 
 {% block content %}
-<h1>You're almost there!</h1>
-<p>We've sent an email with account activation instructions to {{ email }}.</p>
+<h1>{% trans "You're almost there!" %}</h1>
+<p>{% trans "We've sent an email with account activation instructions to" %} {{ email }}.</p>
 {% endblock content %}
