@@ -14,9 +14,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres2',
         'USER': 'w84i',
-        'PASSWORD': os.getenv('w84i_pwd_dev'),
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'PASSWORD': os.getenv('DB_PASS'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     },
 }
 
@@ -32,8 +32,11 @@ BROKER_URL = 'redis://localhost:6379'
 
 # DJANGO DEBUG TOOLBAR SETTINGS
 # https://django-debug-toolbar.readthedocs.org
+
+
 def show_toolbar(request):
     return not request.is_ajax() and request.user and request.user.is_superuser
+
 
 MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware", ]
 INSTALLED_APPS += ["debug_toolbar", ]
@@ -63,6 +66,6 @@ DEBUG_TOOLBAR_PANELS = (
 )
 
 try:
-    from local_settings import * # noqa
+    from local_settings import *  # noqa
 except ImportError:
     pass
