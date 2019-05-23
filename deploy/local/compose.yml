@@ -1,0 +1,49 @@
+version: "2.4"
+
+volumes:
+  postgres_data: {}
+
+services:
+  postgres:
+    image: "postgres:10.6-alpine"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=w84i
+      - POSTGRES_DB=postgres2
+    ports:
+      - "8432:5432"
+    networks:
+      w84it-network:
+        ipv4_address: 172.31.0.2
+
+  mailhog:
+    image: mailhog/mailhog
+    networks:
+      w84it-network:
+        ipv4_address: 172.31.0.3
+    mem_limit: 256M
+    
+  main:
+    build:
+      context: ../../
+      dockerfile: ./deploy/local/Dockerfile
+    command: make start-instance
+    depends_on:
+      - postgres
+    environment:
+      - DB_PASS=pass
+      - DB_HOST=postgres
+      - DB_PORT=7432
+      - DJANGO_SETTINGS_MODULE=w84i_project.settings.development
+    networks:
+      w84it-network:
+        ipv4_address: 172.31.0.6
+    mem_limit: 512M
+
+
+networks:
+  w84it-network:
+    ipam:
+      config:
+        - subnet: 172.31.0.0/16
