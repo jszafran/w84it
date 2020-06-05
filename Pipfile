@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "==2.1.7"
+django = "==2.2.13"
 "argon2-cffi" = "==19.1.0"
 django-compressor = "==2.2"
 "psycopg2" = "==2.7.7"
